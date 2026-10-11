@@ -113,11 +113,9 @@ def generate_scr_narrative(findings: dict) -> dict:
                 # temperature 0.0 = deterministic: this is a factual business report, not
                 # creative writing, so we want the same, number-faithful output every run.
                 temperature=0.0,
-                # explicit limit (not API default); 1024 leaves room for a full 3-section
-                # ~250-word narrative without being cut off.
-                max_output_tokens=1024,
-                # no hidden "thinking" tokens eating into the output budget
-                thinking_config=types.ThinkingConfig(thinking_budget=0),
+                # explicit limit (not API default); 2048 leaves room for a full 3-section
+                # ~250-word narrative (plus any model reasoning tokens) without being cut off.
+                max_output_tokens=2048,
             ),
         )
         text = (response.text or "").strip()
