@@ -28,7 +28,8 @@ SYSTEM_INSTRUCTION = (
     "STRICT RULE: every number in your output must come from the supplied findings and must "
     "appear with exactly the same value and decimals as given (e.g. 97,358.30, 44.4%). "
     "Do not invent, estimate, round differently or derive any new statistic. "
-    "Name the peak month by its month name (e.g. March). Use plain business English."
+    "Name the peak month by its month name (e.g. March). Use plain business English. "
+    "Output ONLY the final narrative: no preamble, no notes, and no list checking the numbers."
 )
 
 
@@ -113,14 +114,23 @@ def generate_scr_narrative(findings: dict) -> dict:
                 # temperature 0.0 = deterministic: this is a factual business report, not
                 # creative writing, so we want the same, number-faithful output every run.
                 temperature=0.0,
-                # explicit limit (not API default); 2048 leaves room for a full 3-section
-                # ~250-word narrative (plus any model reasoning tokens) without being cut off.
-                max_output_tokens=2048,
+                # explicit limit (not API default). Newer Gemini models spend part of this
+                # budget on internal reasoning, so 8192 leaves room for that plus a full
+                # 3-section ~250-word narrative without it being cut off.
+                max_output_tokens=8192,
             ),
         )
         text = (response.text or "").strip()
-        if not text:
-            raise ValueError("Empty response from Gemini")
+
+        # Reject cut-off or malformed answers so a broken narrative is never returned
+        cand = response.candidates[0] if getattr(response, "candidates", None) else None
+        finish = str(getattr(cand, "finish_reason", "") or "")
+        if "MAX_TOKENS" in finish:
+            raise ValueError("Gemini output was cut off at max_output_tokens")
+        missing = [s for s in ("Situation", "Complication", "Resolution") if s not in text]
+        if missing:
+            raise ValueError(f"Gemini output missing SCR section(s): {missing}")
+
         usage = getattr(response, "usage_metadata", None)
         tokens = getattr(usage, "total_token_count", None) if usage else None
         return {"status": "success", "narrative": text, "tokens": tokens, "source": f"gemini:{MODEL}"}
