@@ -19,7 +19,7 @@ HERE = Path(__file__).resolve().parent
 FINDINGS_PATH = HERE / "findings.json"
 SAMPLE_PATH = HERE / "sample_output.txt"
 
-MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.8-flash")
 
 SYSTEM_INSTRUCTION = (
     "You are a senior data analyst writing for Mamaearth's regional ops and finance heads. "
