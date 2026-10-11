@@ -1,0 +1,10 @@
+Source: gemini:gemini-3.8-flash | tokens: 2955
+
+Situation:
+Mamaearth recorded a cleaned total revenue of INR 97,358.30, adjusting down from a raw total before cleaning of INR 99,860.20. While top-line records initially suggested January 2026 was the largest period at INR 29,582.10, that figure was distorted by two bulk outlier orders; corrected performance for that month stands at INR 11,637.10. Consequently, March 2026 emerged as the true peak revenue month at INR 20,318.90, establishing the verified operational baseline for seasonal demand planning.
+
+Complication:
+Profitability and fulfillment efficiency are compromised by order processing redundancies and high product return volumes. Duplicate double-submitted orders generated an artificial variance of INR 2,501.90, skewing pipeline visibility. Simultaneously, return behavior reveals severe vulnerability across payment types. While CARD transactions show a return rate of 14.7% and UPI logs 18.9%, cash collections pose extreme friction with a COD return rate of 44.4%. This issue is highly concentrated geographically: COD orders in Tier-2 cities represent the highest-risk segment at a 54.5% return rate.
+
+Resolution:
+Finance and operations heads must implement immediate controls to protect operating cash flow and lower reverse logistics overhead. Technical teams should establish gateway validation rules to eliminate the duplicate order leakage of INR 2,501.90. In parallel, regional logistics must deploy mandatory pre-dispatch confirmations, shipping fees, or conversion discounts on COD orders in Tier-2 cities to compress the 54.5% return rate. Finally, future capacity and inventory procurement should align with the verified March 2026 benchmark of INR 20,318.90.
