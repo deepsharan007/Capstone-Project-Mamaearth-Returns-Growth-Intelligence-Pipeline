@@ -1,4 +1,0 @@
-# never commit secrets or local DBs
-.env
-*.db
-__pycache__/
