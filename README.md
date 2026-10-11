@@ -109,6 +109,6 @@ Gemini settings, and why each was chosen:
 | System instruction | Analyst role, 3 labeled sections, no invented numbers | Kept separate from the user prompt |
 | User prompt | Built from `findings.json` | No numbers hardcoded |
 | `temperature` | `0.0` | Deterministic, factual report |
-| `max_output_tokens` | `1024` | Explicit limit, so the narrative isn't cut off |
+| `max_output_tokens` | `2048` | Explicit limit, so the narrative isn't cut off |
 | Timeout | `30000` ms (30 s) | `HttpOptions` timeout is in milliseconds |
 | Error handling | `try/except` | Always returns a status dict, never a raw exception |
